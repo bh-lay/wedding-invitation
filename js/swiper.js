@@ -77,11 +77,24 @@
       });
     });
   }
+  function isWeiXin(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    return !!ua.match(/microMessenger/i);
+  }
+  // 微信下不使用transform
+  var privateUseTransform = !isWeiXin();
   function setTop(node,value){
+    if( !node ){
+      return
+    }
     if( isNum(value) ){
       value = value + 'px';
     }
-    node && setStyle(node, 'transform', 'translateY(' + value + ')');
+    if( privateUseTransform ){
+      setStyle(node, 'transform', 'translateY(' + value + ')');
+    }else{
+      setStyle(node, 'top', value);
+    }
   }
   function swiper(node,slideClass){
     var me = this,
@@ -89,12 +102,18 @@
         // 当前使用中的 slide [prev,current,next]
         activeSlide = [],
         activeSlideIndex = 0,
-        touch_start_time = 0;
+        touch_start_time = 0,
+        // 翻页动画时间
+        slideAdjustTime = 300;
 
     this.node = node;
     this.slideClass = slideClass;
     this.slideList = this.node.getElementsByClassName(this.slideClass);
 
+    // 初始化布局
+    each(this.slideList,function(i,node){
+      setTop(node, (i == 0) ? 0 : '100%');
+    });
 
     new util.toucher(this.node).on('swipeStart',function(){
       winHeight = window.innerHeight;
@@ -115,10 +134,13 @@
       setTop(activeSlide[2],deviation + winHeight);
       return false;
     }).on('swipeEnd',function(e){
-      var duration = new Date() - touch_start_time;
+          // 翻页耗费时长
+      var touchDuration = new Date() - touch_start_time,
+          // 设置动画时常
+          animationDuration = Math.min(touchDuration,slideAdjustTime);
 
       setCSS(activeSlide,{
-        transition: Math.min(duration,300) + 'ms ease-out'
+        transition: animationDuration + 'ms ease-out'
       });
       if( e.moveY < -100 ){
         me.nextSlide();
@@ -130,7 +152,7 @@
       return false;
     });
     // console.log(this.slideList);
-
+    // 向上翻页
     this.prevSlide = function(){
       if( activeSlideIndex == 0 ){
         this.currentSlide();
@@ -141,11 +163,13 @@
       setTop(activeSlide[2], '100%');
       activeSlideIndex--;
     };
+    // 停留在当前页
     this.currentSlide = function(){
       setTop(activeSlide[0], '-100%');
       setTop(activeSlide[1], 0);
       setTop(activeSlide[2], '100%');
     };
+    // 向下翻页
     this.nextSlide = function(){
       if( activeSlideIndex == this.slideList.length - 1 ){
         this.currentSlide();
@@ -162,3 +186,4 @@
   };
   window.swiper = swiper;
 })();
+// alert(navigator.userAgent)
