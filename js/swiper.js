@@ -104,7 +104,9 @@
         activeSlideIndex = 0,
         touch_start_time = 0,
         // 翻页动画时间
-        slideAdjustTime = 300;
+        slideAdjustTime = 400,
+        // 默认显示
+        defaultSlideIndex = 0;
 
     this.node = node;
     this.slideClass = slideClass;
@@ -112,9 +114,15 @@
 
     // 初始化布局
     each(this.slideList,function(i,node){
-      setTop(node, (i == 0) ? 0 : '100%');
+      setCSS(node,{
+        position: 'absolute',
+        top: 0,
+        left: 0
+      });
+      setTop(node, (i == defaultSlideIndex) ? 0 : '100%');
     });
-
+    setActiveClass(me.slideList,defaultSlideIndex);
+    
     new util.toucher(this.node).on('swipeStart',function(){
       winHeight = window.innerHeight;
       // alert(winHeight);
@@ -127,7 +135,7 @@
       // 上下偏移量
       var deviation = e.moveY;
       if( ( activeSlideIndex == 0 && deviation>0 ) || ( activeSlideIndex == me.slideList.length - 1 && deviation<0 ) ){
-        deviation = deviation / 3;
+        deviation = Math.sqrt(Math.abs(deviation)) * 4 * (Math.abs(deviation)/deviation);
       }
       setTop(activeSlide[0],deviation - winHeight);
       setTop(activeSlide[1],deviation);
@@ -137,7 +145,7 @@
           // 翻页耗费时长
       var touchDuration = new Date() - touch_start_time,
           // 设置动画时常
-          animationDuration = Math.min(touchDuration,slideAdjustTime);
+          animationDuration = Math.min(touchDuration * 2,slideAdjustTime);
 
       setCSS(activeSlide,{
         transition: animationDuration + 'ms ease-out'
@@ -151,6 +159,15 @@
       }
       return false;
     });
+
+    function setActiveClass(nodes,index){
+      each(nodes,function(i,node){
+        var isCurrentIndex = index == i;
+
+        node && node.classList[(isCurrentIndex ? 'add' : 'remove')]('slideActive');
+        node && node.classList[(isCurrentIndex ? 'remove' : 'add')]('slideHidden');
+      });
+    }
     // console.log(this.slideList);
     // 向上翻页
     this.prevSlide = function(){
@@ -161,6 +178,7 @@
       setTop(activeSlide[0], 0);
       setTop(activeSlide[1], '100%');
       setTop(activeSlide[2], '100%');
+      setActiveClass(activeSlide,0);
       activeSlideIndex--;
     };
     // 停留在当前页
@@ -178,6 +196,7 @@
       setTop(activeSlide[0], '-100%');
       setTop(activeSlide[1], '-100%');
       setTop(activeSlide[2], '0');
+      setActiveClass(activeSlide,2);
       activeSlideIndex++;
     };
   }

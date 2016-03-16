@@ -25,21 +25,24 @@ body{
 	max-height: 800px;
 	min-height: 450px;
 	margin: auto;
-	background: #333;
+	background: #000;
 	overflow: hidden;
 }
 .page{
-	position: absolute;
+	position: relative;;
 	width: 100%;
 	height: 100%;
-	top: 0;
-	left: 0;
 	background: #fff;
 }
 .img{
 	position: relative;
 	background-position: center;
 	background-size: cover;
+}
+.slideHidden .img,
+.slideHidden .text{
+	transition: 0s !important;
+	animation: none
 }
 #page1{
 	.img1{
