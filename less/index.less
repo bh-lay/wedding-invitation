@@ -797,13 +797,15 @@ body{
 #page21{
 	background: #eee;
 	.img1{
-		position: absolute;
-		width: 100%;
-		padding-top: 100%;
 		top: 0;
 		left: 0;
 		border: 10px solid #fff;
 		background-image: url("../images/21-1.jpg");
 		.borderbox();
+		&:before{
+			content: '';
+			display: block;
+			padding-top: 100%;
+		}
 	}
 }
