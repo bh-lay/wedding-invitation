@@ -1,5 +1,6 @@
 @import "./_reset.less";
 @import "./music.less";
+@import "./_page_animation.less";
 
 .borderbox(){
 	box-sizing: border-box;
@@ -33,17 +34,14 @@ body{
 	width: 100%;
 	height: 100%;
 	background: #fff;
+	overflow: hidden;
 }
 .img{
 	position: relative;
 	background-position: center;
 	background-size: cover;
 }
-.slideHidden .img,
-.slideHidden .text{
-	transition: 0s !important;
-	animation: none
-}
+
 #page1{
 	.img1{
 		width: 100%;
@@ -173,8 +171,8 @@ body{
 		width: 117px;
 		height: 117px;
 		top: 10%;
-		left: 50%;
-		margin-left: -58px;
+		right: 25%;
+		margin-right: -58px;
 		border-radius: 55%;
 		background-image: url("../images/4-2.jpg");
 	}

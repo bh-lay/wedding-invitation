@@ -66,15 +66,20 @@
     }
   }
   //设置css
-  function setCSS(doms,cssObj){
-    if( !isNum(doms.length) ){
-      doms = [doms]
+  function setCSS(dom,cssObj ){
+    if( !dom || typeof(cssObj) !== 'object' ){
+      return;
+    }
+    // 若参数dom为数组，则递归设置
+    if( isNum(dom.length) ){
+      each(dom,function(i,node){
+        setCSS(node,cssObj);
+      });
+      return;
     }
 
-    each(doms,function(i,dom){
-      each(cssObj,function(key,value){
-        setStyle(dom,key,value);
-      });
+    each(cssObj,function(key,value){
+      setStyle(dom,key,value);
     });
   }
   function isWeiXin(){
@@ -99,14 +104,15 @@
   function swiper(node,slideClass){
     var me = this,
         winHeight,
+
+        // 默认显示
+        defaultSlideIndex = 19,
         // 当前使用中的 slide [prev,current,next]
         activeSlide = [],
-        activeSlideIndex = 0,
+        activeSlideIndex = defaultSlideIndex,
         touch_start_time = 0,
         // 翻页动画时间
-        slideAdjustTime = 400,
-        // 默认显示
-        defaultSlideIndex = 0;
+        slideAdjustTime = 400;
 
     this.node = node;
     this.slideClass = slideClass;
@@ -121,8 +127,13 @@
       });
       setTop(node, (i == defaultSlideIndex) ? 0 : '100%');
     });
-    setActiveClass(me.slideList,defaultSlideIndex);
-    
+    each(me.slideList,function(i,node){
+      node && node.classList.add('slideHidden');
+    });
+    setTimeout(function(){
+      setActiveClass( [me.slideList[defaultSlideIndex]], 0);
+    });
+
     new util.toucher(this.node).on('swipeStart',function(){
       winHeight = window.innerHeight;
       // alert(winHeight);
@@ -131,6 +142,7 @@
         transition: '0s'
       });
       touch_start_time = new Date();
+      return false;
     }).on('swipe',function(e){
       // 上下偏移量
       var deviation = e.moveY;
@@ -145,7 +157,7 @@
           // 翻页耗费时长
       var touchDuration = new Date() - touch_start_time,
           // 设置动画时常
-          animationDuration = Math.min(touchDuration * 2,slideAdjustTime);
+          animationDuration = Math.min(touchDuration * 1.8,slideAdjustTime);
 
       setCSS(activeSlide,{
         transition: animationDuration + 'ms ease-out'
@@ -159,7 +171,7 @@
       }
       return false;
     });
-
+    // 设置 slide 的 class
     function setActiveClass(nodes,index){
       each(nodes,function(i,node){
         var isCurrentIndex = index == i;
@@ -167,6 +179,11 @@
         node && node.classList[(isCurrentIndex ? 'add' : 'remove')]('slideActive');
         node && node.classList[(isCurrentIndex ? 'remove' : 'add')]('slideHidden');
       });
+    }
+    function setSlideClass(nodes,index){
+      setTimeout(function(){
+        setActiveClass(nodes,index);
+      },slideAdjustTime);
     }
     // console.log(this.slideList);
     // 向上翻页
@@ -178,7 +195,7 @@
       setTop(activeSlide[0], 0);
       setTop(activeSlide[1], '100%');
       setTop(activeSlide[2], '100%');
-      setActiveClass(activeSlide,0);
+      setSlideClass(activeSlide,0);
       activeSlideIndex--;
     };
     // 停留在当前页
@@ -196,7 +213,7 @@
       setTop(activeSlide[0], '-100%');
       setTop(activeSlide[1], '-100%');
       setTop(activeSlide[2], '0');
-      setActiveClass(activeSlide,2);
+      setSlideClass(activeSlide,2);
       activeSlideIndex++;
     };
   }

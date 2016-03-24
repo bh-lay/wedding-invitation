@@ -1,0 +1,52 @@
+@import "./_core.less";
+
+
+.slideHidden .img,
+.slideHidden .text{
+	.transition("0s !important");
+	.animation(none);
+}
+#page1{
+	&.slideHidden{
+		.text{
+			left: -100%
+		}
+	}
+	&.slideActive{
+		.text{
+			transition: 1s;
+		}
+	}
+}
+#page4{
+	&.slideHidden{
+		.text{
+				.transform(translate(100%,0));
+		}
+		.img1{
+			.transform(scale(1.2));
+		}
+		.img2{
+			.transform( translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg) );
+			opacity: 0;
+		}
+	}
+	&.slideActive{
+		.img1{
+			.transform( scale(1) );
+			.transition( 1.5s ease-in-out );
+		}
+		.text{
+			.transform( translate(0,0) );
+			.transition( .8s );
+			.transition-delay( 1s );
+		}
+		.img2{
+			opacity: 1;
+			.transform( rotate(0) translate(0) );
+			.transform-origin( center center );
+			.transition( .5s );
+			.transition-delay(1.5s);
+		}
+	}
+}
