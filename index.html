@@ -159,13 +159,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="page" id="page21">
+		<div class="img img1"></div>
+		<div class="text">
+		</div>
+	</div>
 </div>
 	<span class="music play"></span>
 	<script type="text/javascript" src="/js/toucher.js"></script>
 	<script type="text/javascript" src="/js/swiper.js"></script>
     <script type="text/javascript" src="/js/music.js"></script>
     <script type="text/javascript">
-			new swiper(document.querySelector('.pages'),'page');
+			new swiper(document.querySelector('.pages'),{
+				slideClass: 'page',
+				defaultSlideIndex: location.hash ? location.hash.replace(/\#/,''): 0 
+			});
     </script>
 </body>
 </html>

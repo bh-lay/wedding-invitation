@@ -87,7 +87,7 @@
     return !!ua.match(/microMessenger/i);
   }
   // 微信下不使用transform
-  var privateUseTransform = !isWeiXin();
+  var privateUseTransform = true;//!isWeiXin();
   function setTop(node,value){
     if( !node ){
       return
@@ -101,12 +101,13 @@
       setStyle(node, 'top', value);
     }
   }
-  function swiper(node,slideClass){
+  function swiper(node,param){
+        param = param || {};
     var me = this,
         winHeight,
 
         // 默认显示
-        defaultSlideIndex = 19,
+        defaultSlideIndex = parseInt(param.defaultSlideIndex),
         // 当前使用中的 slide [prev,current,next]
         activeSlide = [],
         activeSlideIndex = defaultSlideIndex,
@@ -115,7 +116,7 @@
         slideAdjustTime = 400;
 
     this.node = node;
-    this.slideClass = slideClass;
+    this.slideClass = param.slideClass || 'page';
     this.slideList = this.node.getElementsByClassName(this.slideClass);
 
     // 初始化布局
@@ -127,12 +128,14 @@
       });
       setTop(node, (i == defaultSlideIndex) ? 0 : '100%');
     });
+    // 所有slide都默认关闭
     each(me.slideList,function(i,node){
       node && node.classList.add('slideHidden');
     });
+    // 设置默认slide为激活状态
     setTimeout(function(){
       setActiveClass( [me.slideList[defaultSlideIndex]], 0);
-    });
+    }, 20);
 
     new util.toucher(this.node).on('swipeStart',function(){
       winHeight = window.innerHeight;
@@ -142,7 +145,8 @@
         transition: '0s'
       });
       touch_start_time = new Date();
-      return false;
+      console.log(activeSlide,activeSlideIndex);
+      // return false;
     }).on('swipe',function(e){
       // 上下偏移量
       var deviation = e.moveY;

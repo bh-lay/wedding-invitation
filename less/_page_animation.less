@@ -18,35 +18,86 @@
 		}
 	}
 }
+#page2{
+	&.slideHidden{
+		.text{
+			.transform(translate(-120%,0));
+		}
+		.img1{
+			.transform(scale(1.5));
+		}
+	}
+	&.slideActive{
+		.img1{
+			.transition( 1.5s ease-out );
+		}
+		.text{
+			.transition( .6s );
+			.transition-delay( 1.3s );
+		}
+	}
+}
+#page3{
+	&.slideHidden{
+		.text{
+			.transform( translate(-120%,0) skew(60deg) );
+		}
+		.img1{
+			.transform( translate(-100%,0) );
+		}
+		.img2{
+			.transform( translate(100%,0) );
+		}
+		.img3{
+			.transform( translate(0,-50%) );
+		}
+	}
+	&.slideActive{
+		.text{
+			.transition( .8s ease-out );
+			.transition-delay( .6s );
+		}
+		.img1{
+			.transition( .4s ease-out );
+			.transition-delay( .6s );
+		}
+		.img2{
+			.transition( .4s ease-out );
+			.transition-delay( .4s );
+		}
+		.img3{
+			.transition( .8s ease-in );
+			.transition-delay( .1s );
+		}
+	}
+}
+
 #page4{
 	&.slideHidden{
 		.text{
-				.transform(translate(100%,0));
+			.transform(translate(100%,0));
 		}
 		.img1{
 			.transform(scale(1.2));
 		}
 		.img2{
 			.transform( translate3d(100%, 0, 0) rotate3d(0, 0, 1, 120deg) );
+			.transform-origin( center center );
 			opacity: 0;
 		}
 	}
 	&.slideActive{
 		.img1{
-			.transform( scale(1) );
-			.transition( 1.5s ease-in-out );
+			.transition( 1.5s ease-out );
 		}
 		.text{
-			.transform( translate(0,0) );
-			.transition( .8s );
-			.transition-delay( 1s );
+			.transition( .5s );
+			.transition-delay( .7s );
 		}
 		.img2{
 			opacity: 1;
-			.transform( rotate(0) translate(0) );
-			.transform-origin( center center );
 			.transition( .5s );
-			.transition-delay(1.5s);
+			.transition-delay(1.2s);
 		}
 	}
 }
