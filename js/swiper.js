@@ -209,6 +209,7 @@
       setTop(activeSlide[2], '100%');
       setSlideClass(activeSlide,0);
       activeSlideIndex--;
+      EMIT.call(this,'slideChange',[activeSlideIndex]);
     };
     // 停留在当前页
     this.currentSlide = function(){
@@ -227,6 +228,7 @@
       setTop(activeSlide[2], '0');
       setSlideClass(activeSlide,2);
       activeSlideIndex++;
+      EMIT.call(this,'slideChange',[activeSlideIndex]);
     };
   }
   Swiper.prototype = {
