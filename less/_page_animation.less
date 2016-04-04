@@ -172,20 +172,21 @@
 			.transform(translate(-100%,0));
 		}
 		.img2{
-			.transform(translate(-16.67%,-33.33%));
+			.transform( scale(1.5) );
+			.transform-origin( right bottom );
 		}
 	}
 	&.slideActive{
 		.img1{
-			.transition( .6s ease-out );
-			.transition-delay( .8s );
+			.transition( .5s ease-out );
+			.transition-delay( .7s );
 		}
 		.img2{
 			.transition( .8s ease-out );
 		}
 		.text{
-			.transition( .5s );
-			.transition-delay( 1.4s );
+			.transition( .4s );
+			.transition-delay( 1.1s );
 		}
 	}
 }
