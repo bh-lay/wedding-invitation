@@ -88,6 +88,30 @@
   }
   // 微信下不使用transform
   var privateUseTransform = true;//!isWeiXin();
+  
+  //处理自定义事件
+  function ON(eventName,callback){
+    this._events = this._events || {};
+    //事件堆无该事件，创建一个事件堆
+    if(!this._events[eventName]){
+      this._events[eventName] = [];
+    }
+    this._events[eventName].push(callback);
+    //提供链式调用的支持
+    return this;
+  }
+  function EMIT(eventName,args){
+    this._events = this._events || {};
+    //事件堆无该事件，结束运行
+    if(!this._events[eventName]){
+      return
+    }
+    for(var i=0,total=this._events[eventName].length;i<total;i++){
+      this._events[eventName][i].apply(this.event_global || this,args);
+    }
+  }
+
+  // 设置top
   function setTop(node,value){
     if( !node ){
       return
@@ -110,7 +134,7 @@
       node && node.classList[(isCurrentIndex ? 'remove' : 'add')]('slideHidden');
     });
   }
-  function swiper(node,param){
+  function Swiper(node,param){
         param = param || {};
     var me = this,
         // 窗口高度
@@ -205,7 +229,7 @@
       activeSlideIndex++;
     };
   }
-  swiper.prototype = {
+  Swiper.prototype = {
     init: function( index ){
       var me = this;
       // 初始化布局
@@ -225,8 +249,9 @@
       setTimeout(function(){
         setActiveClass( [me.slideList[ index ]], 0);
       }, 20);
-    }
+    },
+    on: ON
   };
-  window.swiper = swiper;
+  window.Swiper = Swiper;
 })();
 // alert(navigator.userAgent)
