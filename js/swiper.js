@@ -1,4 +1,10 @@
-(function(){
+(function( global,factory ){
+  if (typeof define === 'function' && define.amd) {
+    define(factory);
+  } else {
+    global.Swiper = factory();
+  }
+})(this,function(){
   /**
    * 判断对象类型
    * string number array
@@ -254,6 +260,5 @@
     },
     on: ON
   };
-  window.Swiper = Swiper;
-})();
-// alert(navigator.userAgent)
+  return Swiper;
+});
