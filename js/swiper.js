@@ -101,9 +101,19 @@
       setStyle(node, 'top', value);
     }
   }
+  // 设置 slide 的 class
+  function setActiveClass(nodes,index){
+    each(nodes,function(i,node){
+      var isCurrentIndex = index == i;
+
+      node && node.classList[(isCurrentIndex ? 'add' : 'remove')]('slideActive');
+      node && node.classList[(isCurrentIndex ? 'remove' : 'add')]('slideHidden');
+    });
+  }
   function swiper(node,param){
         param = param || {};
     var me = this,
+        // 窗口高度
         winHeight,
 
         // 默认显示
@@ -119,23 +129,7 @@
     this.slideClass = param.slideClass || 'page';
     this.slideList = this.node.getElementsByClassName(this.slideClass);
 
-    // 初始化布局
-    each(this.slideList,function(i,node){
-      setCSS(node,{
-        position: 'absolute',
-        top: 0,
-        left: 0
-      });
-      setTop(node, (i == defaultSlideIndex) ? 0 : '100%');
-    });
-    // 所有slide都默认关闭
-    each(me.slideList,function(i,node){
-      node && node.classList.add('slideHidden');
-    });
-    // 设置默认slide为激活状态
-    setTimeout(function(){
-      setActiveClass( [me.slideList[defaultSlideIndex]], 0);
-    }, 20);
+    this.init( defaultSlideIndex );
 
     new util.toucher(this.node).on('swipeStart',function(){
       winHeight = window.innerHeight;
@@ -145,7 +139,6 @@
         transition: '0s'
       });
       touch_start_time = new Date();
-      console.log(activeSlide,activeSlideIndex);
       // return false;
     }).on('swipe',function(e){
       // 上下偏移量
@@ -175,15 +168,6 @@
       }
       return false;
     });
-    // 设置 slide 的 class
-    function setActiveClass(nodes,index){
-      each(nodes,function(i,node){
-        var isCurrentIndex = index == i;
-
-        node && node.classList[(isCurrentIndex ? 'add' : 'remove')]('slideActive');
-        node && node.classList[(isCurrentIndex ? 'remove' : 'add')]('slideHidden');
-      });
-    }
     function setSlideClass(nodes,index){
       setTimeout(function(){
         setActiveClass(nodes,index);
@@ -222,7 +206,26 @@
     };
   }
   swiper.prototype = {
-
+    init: function( index ){
+      var me = this;
+      // 初始化布局
+      each(this.slideList,function(i,node){
+        setCSS(node,{
+          position: 'absolute',
+          top: 0,
+          left: 0
+        });
+        setTop(node, (i == index ) ? 0 : '100%');
+      });
+      // 所有slide都默认关闭
+      each(me.slideList,function(i,node){
+        node && node.classList.add('slideHidden');
+      });
+      // 设置默认slide为激活状态
+      setTimeout(function(){
+        setActiveClass( [me.slideList[ index ]], 0);
+      }, 20);
+    }
   };
   window.swiper = swiper;
 })();
