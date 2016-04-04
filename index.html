@@ -114,7 +114,7 @@
 		</script>
 	</div>
 </div>
-	<span class="music play"></span>
+	<div class="music play"><span></span></div>
 	<script type="text/javascript" src="/js/toucher.js"></script>
 	<script type="text/javascript" src="/js/swiper.js"></script>
     <script type="text/javascript" src="/js/music.js"></script>
@@ -154,6 +154,9 @@
 		swiper.on('slideChange',function( index ){
 			lazyLoad( index );
 		});
+
+		// 默认播放音乐
+		// backgroundMusic();
     </script>
 </body>
 </html>
