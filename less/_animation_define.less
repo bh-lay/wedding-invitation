@@ -1,0 +1,26 @@
+@import "./_core.less";
+
+// 滚入
+@-webkit-keyframes rotateIn {
+	from{
+		.transform( translate3d(150%, 0, 0) rotate3d(0, 0, 1, 100deg) );
+		.transform-origin( center center );
+		opacity: 0;
+	}
+	to {
+		.transform( translate3d(0, 0, 0) rotate3d(0, 0, 0, 0) );
+	    opacity: 1;
+  	}
+}
+
+@keyframes rotateIn {
+	from{
+		.transform( translate3d(150%, 0, 0) rotate3d(0, 0, 1, 100deg) );
+		.transform-origin( center center );
+		opacity: 0;
+	}
+	to {
+		.transform( translate3d(0, 0, 0) rotate3d(0, 0, 0, 0) );
+	    opacity: 1;
+  	}
+}
