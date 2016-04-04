@@ -1,5 +1,5 @@
 (function(){
-	var defaultIndex = location.hash ? location.hash.replace(/\#/,''): 0,
+	var defaultIndex = location.hash ? parseInt(location.hash.replace(/\#/,'')) : 0,
 		swiper = new Swiper(document.querySelector('.pages'),{
 			slideClass: 'page',
 			defaultSlideIndex: defaultIndex
@@ -36,4 +36,8 @@
 
 	// 默认播放音乐
 	// backgroundMusic();
+
+	// swiper.on('slideChange',function( index ){
+	// 	location.hash = index;
+	// });
 })();

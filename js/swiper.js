@@ -147,7 +147,7 @@
         winHeight,
 
         // 默认显示
-        defaultSlideIndex = parseInt(param.defaultSlideIndex),
+        defaultSlideIndex = parseInt(param.defaultSlideIndex) || 0,
         // 当前使用中的 slide [prev,current,next]
         activeSlide = [],
         activeSlideIndex = defaultSlideIndex,
