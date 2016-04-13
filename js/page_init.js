@@ -3,7 +3,11 @@
 		swiper = new Swiper(document.querySelector('.pages'),{
 			slideClass: 'page',
 			defaultSlideIndex: defaultIndex
-		});
+		}),
+		node_page_num_current = document.querySelector('.page-count .current'),
+		node_page_num_total = document.querySelector('.page-count .total');
+
+	node_page_num_total.innerHTML = swiper.slideList.length;
 
 	var isLoadedList = [];
 	function replaceTplToSlide( index ){
@@ -32,6 +36,7 @@
 	lazyLoad( defaultIndex );
 	swiper.on('slideChange',function( index ){
 		lazyLoad( index );
+		node_page_num_current.innerHTML = index + 1;
 	});
 
 	// 默认播放音乐

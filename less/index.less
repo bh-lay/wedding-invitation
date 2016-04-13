@@ -18,7 +18,44 @@ body{
 body{
 	font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
-
+.page-count{
+	position: fixed;
+	@width: 50px;
+	@height: 20px;
+	right: 0;
+	bottom: 0;
+	width: @width;
+	height: @height;
+	margin-left: -@width/2;
+	text-align: center;
+	font-size: 0;
+	background: rgba(0,0,0,.4);
+	border-radius: 10px 0 0 0;
+	opacity: .4;
+	span{
+		display: inline-block;
+		vertical-align: text-bottom;
+		height: @height;
+		line-height: @height;
+		font-size: 12px;
+		color: #fff;
+	}
+	.split{
+		display: inline-block;
+		position: relative;
+		width: 10px;
+		&:before{
+			content: '';
+			position: absolute;
+			width: 1px;
+			height: 60%;
+			top: 20%;
+			left: 50%;
+			.transform( rotate(20deg) );
+			background: #fff;
+		}
+	}
+}
 .pages{
 	position: relative;
 	height: 100%;
