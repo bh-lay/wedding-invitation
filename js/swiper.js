@@ -153,7 +153,9 @@
         activeSlideIndex = defaultSlideIndex,
         touch_start_time = 0,
         // 翻页动画时间
-        slideAdjustTime = 400;
+        slideAdjustTime = 400,
+        // 动画时长
+        animationDuration;
 
     this.node = node;
     this.slideClass = param.slideClass || 'page';
@@ -182,26 +184,36 @@
       return false;
     }).on('swipeEnd',function(e){
           // 翻页耗费时长
-      var touchDuration = new Date() - touch_start_time,
-          // 设置动画时常
-          animationDuration = Math.min(touchDuration * 1.8,slideAdjustTime);
+      var touchDuration = new Date() - touch_start_time;
+
+      // 设置动画时长
+      animationDuration = Math.min(touchDuration * 1.8,slideAdjustTime);
 
       setCSS(activeSlide,{
         transition: animationDuration + 'ms ease-out'
       });
-      if( e.moveY < -100 ){
-        me.nextSlide();
-      }else if( e.moveY > 100 ){
-        me.prevSlide();
+      // alert( e.moveY + '-' + touchDuration );
+      if( touchDuration < 200 ){
+        if( e.moveY < 0 ){
+          me.nextSlide();
+        }else if( e.moveY > 0 ){
+          me.prevSlide();
+        }
       }else{
-        me.currentSlide();
+        if( e.moveY < -240 ){
+          me.nextSlide();
+        }else if( e.moveY > 240 ){
+          me.prevSlide();
+        }else{
+          me.currentSlide();
+        }
       }
       return false;
     });
     function setSlideClass(nodes,index){
       setTimeout(function(){
         setActiveClass(nodes,index);
-      },slideAdjustTime);
+      },animationDuration);
     }
     // console.log(this.slideList);
     // 向上翻页
