@@ -184,7 +184,9 @@
       return false;
     }).on('swipeEnd',function(e){
           // 翻页耗费时长
-      var touchDuration = new Date() - touch_start_time;
+      var touchDuration = new Date() - touch_start_time,
+          // 判断是否执行动画的边界线
+          animationBoundary = touchDuration < 200 ? 5 : 240;
 
       // 设置动画时长
       animationDuration = Math.min(touchDuration * 1.8,slideAdjustTime);
@@ -193,20 +195,12 @@
         transition: animationDuration + 'ms ease-out'
       });
       // alert( e.moveY + '-' + touchDuration );
-      if( touchDuration < 200 ){
-        if( e.moveY < 0 ){
-          me.nextSlide();
-        }else if( e.moveY > 0 ){
-          me.prevSlide();
-        }
+      if( e.moveY < -animationBoundary ){
+        me.nextSlide();
+      }else if( e.moveY > animationBoundary ){
+        me.prevSlide();
       }else{
-        if( e.moveY < -240 ){
-          me.nextSlide();
-        }else if( e.moveY > 240 ){
-          me.prevSlide();
-        }else{
-          me.currentSlide();
-        }
+        me.currentSlide();
       }
       return false;
     });
