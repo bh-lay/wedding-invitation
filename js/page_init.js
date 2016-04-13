@@ -1,5 +1,5 @@
 (function(){
-	var defaultIndex = location.hash ? parseInt(location.hash.replace(/\#/,'')) : 0,
+	var defaultIndex = location.hash ? parseInt(location.hash.replace(/\#/,'')) - 1 : 0,
 		swiper = new Swiper(document.querySelector('.pages'),{
 			slideClass: 'page',
 			defaultSlideIndex: defaultIndex
@@ -8,6 +8,7 @@
 		node_page_num_total = document.querySelector('.page-count .total');
 
 	node_page_num_total.innerHTML = swiper.slideList.length;
+	node_page_num_current.innerHTML = defaultIndex + 1;
 
 	var isLoadedList = [];
 	function replaceTplToSlide( index ){

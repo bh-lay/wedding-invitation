@@ -158,7 +158,7 @@
 	}
 	&.slideActive{
 		.img1{
-			.transition( 1.5s ease-out );
+			.transition( 1s ease-out );
 		}
 	}
 }
@@ -378,8 +378,6 @@
 			.transition( 1s );
 		}
 		.text{
-			// .transition( .6s );
-			// .transition-delay(.8s);
 			opacity: 0;
 			.animation(rotateIn .6s .8s forwards);
 		}
@@ -389,11 +387,11 @@
 		}
 		.img2{
 			opacity: 0;
-			.animation(rotateIn 1s 1.4s forwards);
+			.animation(rotateIn 1s 1.2s forwards);
 		}
 		.img3{
 			opacity: 0;
-			.animation(rotateIn 1s 2s forwards);
+			.animation(rotateIn .5s 1.5s forwards);
 		}
 	}
 }
@@ -404,7 +402,6 @@
 		.img1{
 			.transform( scale(.3,.3) );
 		}
-		.text,
 		.img2,
 		.img3{
 			opacity: 0;
@@ -424,3 +421,131 @@
 	}
 }
 
+#page17{
+	&.slideHidden{
+		.img1{
+			.transform( scale(.3,.3) );
+		}
+		.img2{
+			opacity: 0;
+		}
+		.pic1{
+			.transform(translate(100%,0));
+		}
+		.pic2{
+			.transform(translate(-100%,0));
+		}
+	}
+	&.slideActive{
+		.img1{
+			.transition( 1s );
+		}
+		.img2{
+			.animation(rotateIn .6s);
+		}
+		.pic1,
+		.pic2{
+			.transition(.4s);
+			.transition-delay(.4s);
+		}
+	}
+}
+#page18{
+	&.slideHidden{
+		.img1{
+			.transform( scale(.3,.3) );
+		}
+		.img2{
+			opacity: 0;
+		}
+		.text{
+			.transform(translate(0,200%));
+		}
+		.pic1{
+			.transform(translate(100%,0));
+		}
+	}
+	&.slideActive{
+		.img1{
+			.transition( 1s );
+		}
+		.img2{
+			.animation(lightSpeedIn .6s);
+		}
+		.text{
+			.transition(.4s);
+			.transition-delay(.1s);
+		}
+		.pic1{
+			.transition(.4s);
+			.transition-delay(.4s);
+		}
+	}
+}
+
+
+#page19{
+	&.slideHidden{
+		.img1{
+			.transform( scale(.3,.3) );
+		}
+		.img2{
+			opacity: 0;
+		}
+		.pic1{
+			.transform(translate(-200px,0));
+		}
+	}
+	&.slideActive{
+		.img1{
+			.transition( 1s );
+		}
+		.img2{
+			.animation(bounceIn .6s);
+		}
+		.pic1{
+			.transition(.4s);
+			.transition-delay(.4s);
+		}
+	}
+}
+
+#page20{
+	&.slideHidden{
+		.text{
+			.transform(translate(-100%,0));
+		}
+		.img1{
+			.transform(translate(100%,0));
+		}
+		.img2{
+			.transform(translate(0,-70%));
+		}
+	}
+	&.slideActive{
+		.img1{
+			.transition( .5s ease-out );
+			.transition-delay( .7s );
+		}
+		.img2{
+			.transition( .8s ease-out );
+		}
+		.text{
+			.transition( .4s );
+			.transition-delay( 1.1s );
+		}
+	}
+}
+
+#page21{
+	&.slideHidden{
+		.img1{
+			opacity: 0;
+		}
+	}
+	&.slideActive{
+		.img1{
+			.animation(bounceIn .6s);
+		}
+	}
+}
