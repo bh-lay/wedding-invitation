@@ -164,7 +164,7 @@
     new util.toucher(this.node).on('swipeStart',function(){
       winHeight = window.innerHeight;
       // alert(winHeight);
-      activeSlide = [me.slideList[activeSlideIndex-1],me.slideList[activeSlideIndex],me.slideList[activeSlideIndex+1]];
+      activeSlide = [me.slideList[activeSlideIndex-1] || me.slideList[me.slideList.length-1],me.slideList[activeSlideIndex],me.slideList[activeSlideIndex+1] || me.slideList[0]];
       setCSS(activeSlide,{
         transition: '0s'
       });
@@ -174,7 +174,7 @@
       // 上下偏移量
       var deviation = e.moveY;
       if( ( activeSlideIndex == 0 && deviation>0 ) || ( activeSlideIndex == me.slideList.length - 1 && deviation<0 ) ){
-        deviation = Math.sqrt(Math.abs(deviation)) * 4 * (Math.abs(deviation)/deviation);
+        deviation = deviation / 4;
       }
       setTop(activeSlide[0],deviation - winHeight);
       setTop(activeSlide[1],deviation);
@@ -206,15 +206,14 @@
     // console.log(this.slideList);
     // 向上翻页
     this.prevSlide = function(){
-      if( activeSlideIndex == 0 ){
-        this.currentSlide();
-        return;
-      }
       setTop(activeSlide[0], 0);
       setTop(activeSlide[1], '100%');
       setTop(activeSlide[2], '100%');
       setSlideClass(activeSlide,0);
       activeSlideIndex--;
+      if( activeSlideIndex == -1 ){
+        activeSlideIndex = me.slideList.length - 1;
+      }
       EMIT.call(this,'slideChange',[activeSlideIndex]);
     };
     // 停留在当前页
@@ -225,15 +224,15 @@
     };
     // 向下翻页
     this.nextSlide = function(){
-      if( activeSlideIndex == this.slideList.length - 1 ){
-        this.currentSlide();
-        return;
-      }
       setTop(activeSlide[0], '-100%');
       setTop(activeSlide[1], '-100%');
       setTop(activeSlide[2], '0');
       setSlideClass(activeSlide,2);
       activeSlideIndex++;
+
+      if( activeSlideIndex == me.slideList.length ){
+        activeSlideIndex = 0;
+      }
       EMIT.call(this,'slideChange',[activeSlideIndex]);
     };
   }
