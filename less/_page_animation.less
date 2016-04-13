@@ -85,7 +85,7 @@
 			.transform(translate(100%,0));
 		}
 		.img1{
-			.transform( scale(.7) );
+			.transform( scale(.4) );
 		}
 		.img2{
 			opacity: 0;
@@ -403,7 +403,9 @@
 			.transform( scale(.3,.3) );
 		}
 		.img2,
-		.img3{
+		.img3,
+		.pic_node_1,
+		.pic_node_2{
 			opacity: 0;
 		}
 	}
@@ -417,6 +419,11 @@
 		.img3{
 			.transition( 1s );
 			.transition-delay(.5s);
+		}
+		.pic_node_1,
+		.pic_node_2{
+			.transition( .5s );
+			.transition-delay(1s);
 		}
 	}
 }
