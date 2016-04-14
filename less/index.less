@@ -108,12 +108,12 @@ body{
 		h1{
 			margin-bottom: 10px;
 			text-align: center;
-			font-size: 18px;
+			font-size: 20px;
 			font-weight: normal;
 			color: #fff;
 			small{
-				padding: 0 .5em;
-				font-size: 12px;
+				padding: 0 .4em;
+				font-size: 16px;
 			}
 		}
 		.pic2{
@@ -127,7 +127,7 @@ body{
 		}
 		p{
 			text-align: center;
-			font-size: 14px;
+			font-size: 16px;
 			color: #fff;
 		}
 	}
@@ -491,9 +491,9 @@ body{
 	}
 	.img2{
 		position: absolute;
-		width: 90%;
-		height: 77%;
-		top: 12%;
+		width: 85%;
+		height: 80%;
+		top: 10%;
 		left: 5%;
 		background-image: url("../images/13-3.jpg");
 	}
@@ -844,6 +844,25 @@ body{
 			content: '';
 			display: block;
 			padding-top: 100%;
+		}
+		.mask{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			span{
+				float: left;
+				display: block;
+				width: 33.333333%;
+				background: #fff;
+				opacity: 0;
+				&:before{
+					content: '';
+					display: block;
+					padding-top: 100%;
+				}
+			}
 		}
 	}
 }
