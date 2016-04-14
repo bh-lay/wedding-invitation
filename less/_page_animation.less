@@ -14,6 +14,9 @@
 		}
 		.text{
 			opacity: 0;
+			h1{
+				.transform( translate(150%, 0) scale(1.4) );
+			}
 		}
 	}
 	&.slideActive{
@@ -23,13 +26,17 @@
 		.text{
 			opacity: 0;
 			.animation(rotateIn .6s .6s forwards);
+			h1{
+				.transition( .4s ease-out );
+				.transition-delay( 1s );
+			}
 		}
 	}
 }
 #page2{
 	&.slideHidden{
 		.text{
-			.transform(translate(-120%,0));
+			.transform(translate(-140%,0));
 		}
 		.img1{
 			.transform(scale(1.5));
@@ -48,13 +55,13 @@
 #page3{
 	&.slideHidden{
 		.text{
-			.transform( translate(-20%,0) scale(1,0) );
+			opacity: 0;
 		}
 		.img1{
-			.transform( translate(0,50%) );
+			.transform( translate(-100%,0) );
 		}
 		.img2{
-			.transform( translate(0,50%) );
+			.transform( translate(100%,0) );
 		}
 		.img3{
 			.transform( translate(0,100%) );
@@ -62,19 +69,19 @@
 	}
 	&.slideActive{
 		.text{
-			.transition( .8s ease-out );
-			.transition-delay( 1s );
+			opacity: 0;
+			.animation(lightSpeedIn .6s 1s forwards);
 		}
 		.img1{
-			.transition( .4s ease-out );
-			.transition-delay( .5s );
+			.transition( .8s ease-out );
 		}
 		.img2{
-			.transition( .4s ease-out );
-			.transition-delay( .8s );
+			.transition( .5s ease-out );
+			.transition-delay( .5s );
 		}
 		.img3{
-			.transition( 1s ease-out );
+			.transition( .3s ease-out );
+			.transition-delay( .7s );
 		}
 	}
 }
@@ -83,6 +90,9 @@
 	&.slideHidden{
 		.text{
 			.transform(translate(100%,0));
+			p{
+				.transform(translate(0,200%));
+			}
 		}
 		.img1{
 			.transform( scale(.4) );
@@ -96,12 +106,16 @@
 			.transition( 1s ease-out );
 		}
 		.text{
-			.transition( .4s );
+			.transition( .5s );
 			.transition-delay( .7s );
+			p{
+				.transition( .4s );
+				.transition-delay( 1.4s );
+			}
 		}
 		.img2{
 			opacity: 0;
-			.animation(rotateIn .6s 1s forwards);
+			.animation(rotateIn 1s 1s forwards);
 		}
 	}
 }
@@ -192,27 +206,25 @@
 }
 #page9{
 	&.slideHidden{
-		.img1{
-			.transform(translate(0,100%));
-		}
-		.img2{
+		.img1,
+		.img3{
 			.transform(translate(100%,0));
 		}
-		.img3{
+		.img2{
 			.transform(translate(-100%,0));
 		}
 	}
 	&.slideActive{
 		.img1{
-			.transition( .8s ease-out );
+			.transition( 1s ease-out );
 		}
 		.img2{
-			.transition( .5s ease-out );
-			.transition-delay( .8s );
+			.transition( .6s ease-out );
+			.transition-delay( .5s );
 		}
 		.img3{
-			.transition( .5s ease-out );
-			.transition-delay( .8s );
+			.transition( .3s ease-out );
+			.transition-delay( .7s );
 		}
 	}
 }
@@ -220,8 +232,7 @@
 #page10{
 	&.slideHidden{
 		.img1{
-			.transform(translate(0,75%));
-			opacity: .5;
+			opacity: 0;
 		}
 		.img2{
 			.transform(translate(100%,0));
@@ -235,19 +246,18 @@
 	}
 	&.slideActive{
 		.img1{
-			.transition( 1s ease-out );
+			.animation(flipInX .6s);
 		}
 		.img2{
 			.transition( .5s ease-out );
-			.transition-delay( .8s );
 		}
 		.text{
 			.transition( .5s ease-out );
-			.transition-delay( .8s );
+			.transition-delay( .4s );
 		}
 		.pic1{
 			.transition( .8s ease-out );
-			.transition-delay( 1s );
+			.transition-delay( .7s );
 		}
 	}
 }
@@ -448,7 +458,7 @@
 			.transition( 1s );
 		}
 		.img2{
-			.animation(rotateIn .6s);
+			.animation(flipInX .6s);
 		}
 		.pic1,
 		.pic2{
@@ -494,10 +504,10 @@
 #page19{
 	&.slideHidden{
 		.img1{
-			.transform( scale(.3,.3) );
+			opacity: 0;
 		}
 		.img2{
-			opacity: 0;
+			.transform( scale(.3,.3) );
 		}
 		.pic1{
 			.transform(translate(-200px,0));
@@ -505,10 +515,10 @@
 	}
 	&.slideActive{
 		.img1{
-			.transition( 1s );
+			.animation(flipInX .6s);
 		}
 		.img2{
-			.animation(bounceIn .6s);
+			.transition( 1s );
 		}
 		.pic1{
 			.transition(.4s);
@@ -526,33 +536,49 @@
 			.transform(translate(100%,0));
 		}
 		.img2{
-			.transform(translate(0,-70%));
+			opacity: 0;
 		}
 	}
 	&.slideActive{
+		.img2{
+			.animation(lightSpeedIn .6s);
+		}
 		.img1{
 			.transition( .5s ease-out );
-			.transition-delay( .7s );
-		}
-		.img2{
-			.transition( .8s ease-out );
+			.transition-delay( .3s );
 		}
 		.text{
 			.transition( .4s );
-			.transition-delay( 1.1s );
+			.transition-delay( .6s );
 		}
 	}
 }
 
 #page21{
 	&.slideHidden{
-		.img1{
-			opacity: 0;
+		.img1 .mask span{
+			opacity: 1;
 		}
 	}
 	&.slideActive{
-		.img1{
-			.animation(bounceIn .6s);
+		.img1 .mask span:nth-child(1),
+		.img1 .mask span:nth-child(3){
+			.transition( 2s );
+		}
+		.img1 .mask span:nth-child(2),
+		.img1 .mask span:nth-child(4),
+		.img1 .mask span:nth-child(9){
+			.transition( .8s );
+		}
+		.img1 .mask span:nth-child(5){
+			.transition( 1.4s );
+		}
+		.img1 .mask span:nth-child(6),
+		.img1 .mask span:nth-child(7){
+			.transition( 3s );
+		}
+		.img1 .mask span:nth-child(8){
+			.transition( 1.2s );
 		}
 	}
 }
