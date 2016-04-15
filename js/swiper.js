@@ -204,7 +204,8 @@
         me.nextSlide();
       }else if( e.moveY > animationBoundary ){
         me.prevSlide();
-      }else{
+      }else if( e.moveY ){
+        // 若手指有相对移动，恢复至当前页，
         me.currentSlide();
       }
       return false;
