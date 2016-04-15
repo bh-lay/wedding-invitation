@@ -155,7 +155,13 @@
         // 翻页动画时间
         slideAdjustTime = 400,
         // 动画时长
-        animationDuration;
+        animationDuration,
+        // 手指滑动时长边界值（低于此值快速响应动画，高于此值则迟缓响应动画）
+        touchDurationBoundary = 300,
+        // 快速响应动画的边界条件
+        animationBoundaryQuick = 5,
+        // 迟缓响应动画的边界条件
+        animationBoundaryDull = 240;
 
     this.node = node;
     this.slideClass = param.slideClass || 'page';
@@ -185,9 +191,8 @@
     }).on('swipeEnd',function(e){
           // 翻页耗费时长
       var touchDuration = new Date() - touch_start_time,
-          // 判断是否执行动画的边界线
-          animationBoundary = touchDuration < 200 ? 5 : 240;
-
+          // 判断执行动画使用的边界线
+          animationBoundary = touchDuration < touchDurationBoundary ? animationBoundaryQuick : animationBoundaryDull;
       // 设置动画时长
       animationDuration = Math.min(touchDuration * 1.8,slideAdjustTime);
 
