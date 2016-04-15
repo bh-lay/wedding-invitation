@@ -191,16 +191,16 @@
 		}
 	}
 	&.slideActive{
-		.img1{
-			.transition( .5s ease-out );
-			.transition-delay( .7s );
-		}
 		.img2{
-			.transition( .8s ease-out );
+			.transition( 1s ease-out );
+		}
+		.img1{
+			.transition( .7s ease-out );
+			.transition-delay( .8s );
 		}
 		.text{
-			.transition( .4s );
-			.transition-delay( 1.1s );
+			.transition( .6s );
+			.transition-delay( 1.5s );
 		}
 	}
 }
@@ -269,6 +269,10 @@
 		}
 		.text{
 			opacity: 0;
+			p,
+			.pic2{
+				.transform( translate(0 140%) );
+			}
 		}
 	}
 	&.slideActive{
@@ -278,6 +282,14 @@
 		.text{
 			opacity: 0;
 			.animation(slideInUp .5s .8s forwards);
+			p{
+				opacity: 0;
+				.animation(slideInUp .5s 1.2s forwards);
+			}
+			.pic2{
+				opacity: 0;
+				.animation(slideInUp .5s 1.5s forwards);
+			}
 		}
 	}
 }
@@ -424,16 +436,17 @@
 			.transition( 1s );
 		}
 		.img2{
-			.animation(rotateIn .6s);
+			opacity: 0;
+			.animation(rotateIn .6s .8s forwards);
 		}
 		.img3{
 			.transition( 1s );
-			.transition-delay(.5s);
+			.transition-delay(1.3s);
 		}
 		.pic_node_1,
 		.pic_node_2{
-			.transition( .5s );
-			.transition-delay(1s);
+			.transition( 1s );
+			.transition-delay(1.8s);
 		}
 	}
 }
@@ -487,15 +500,16 @@
 			.transition( 1s );
 		}
 		.img2{
-			.animation(lightSpeedIn .6s);
+			opacity: 0;
+			.animation(lightSpeedIn .8s .7s forwards );
 		}
 		.text{
 			.transition(.4s);
-			.transition-delay(.1s);
+			.transition-delay(1.4s);
 		}
 		.pic1{
 			.transition(.4s);
-			.transition-delay(.4s);
+			.transition-delay(1.6s);
 		}
 	}
 }
@@ -514,15 +528,16 @@
 		}
 	}
 	&.slideActive{
-		.img1{
-			.animation(flipInX .6s);
-		}
 		.img2{
 			.transition( 1s );
 		}
+		.img1{
+			opacity: 0;
+			.animation( flipInX .6s .8s forwards );
+		}
 		.pic1{
 			.transition(.4s);
-			.transition-delay(.4s);
+			.transition-delay(1.2s);
 		}
 	}
 }
@@ -544,12 +559,12 @@
 			.animation(lightSpeedIn .6s);
 		}
 		.img1{
-			.transition( .5s ease-out );
-			.transition-delay( .3s );
+			.transition( .6s ease-out );
+			.transition-delay( .5s );
 		}
 		.text{
-			.transition( .4s );
-			.transition-delay( .6s );
+			.transition( .6s );
+			.transition-delay( 1s );
 		}
 	}
 }
