@@ -7,5 +7,17 @@
 			val = String(val);
 		return (MANY_ZEROS.substring(0, minLength - val.length)) + val;
 	}
-	console.log(leftZeroPad(countDownDays,3))
+	function createCountDownHtml( str ){
+		var arr = str.match(/./g),
+			html = '';
+		arr.forEach(function( num ){
+			html += '<span>' + num + '</span>';
+		});
+		return html + '<strong>天</strong>';
+	}
+	var str_day = leftZeroPad(countDownDays,3),
+		html = createCountDownHtml( str_day );
+	
+	utils.query('.countdown-body').innerHTML = html;
+
 })();
