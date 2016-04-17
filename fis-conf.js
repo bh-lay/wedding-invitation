@@ -34,7 +34,7 @@ fis.match('*.png', {
     optimizer : fis.plugin('png-compressor')
 }); 
 fis.match('::packager', {
-  postpackager: fis.plugin('loader'),
+  // postpackager: fis.plugin('loader'),
     spriter : fis.plugin('csssprites')
 });
 
