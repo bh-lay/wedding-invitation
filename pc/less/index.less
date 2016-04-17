@@ -1,0 +1,28 @@
+@import "/less/_reset.less";
+
+html,
+body{
+	height: 100%;
+}
+.page-index{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: url("/pc/images/background.jpg") no-repeat center center;
+	.mask{
+		position: relative;
+		height: 100%;
+		background: url("/pc/images/graphy.png") center center;
+	}
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (min-device-pixel-ratio: 2) {
+	.page-index{
+		.mask{
+			background-image: url("/pc/images/graphy_@2X.png");
+			background-size: 80px 80px;
+		}
+	}
+}
