@@ -22,6 +22,12 @@
 			<div class="side-body">
 				<div class="caption">陈仁磊&田晓杰</div>
 				<div class="desc">2016年9月28日新婚之喜！</div>
+				<div class="countdown">
+					<div class="title">距离大喜还有</div>
+					<div class="countdown-body">
+						<span>1</span><span>8</span><span>6</span><strong>天</strong>
+					</div>
+				</div>
 				<div class="qr-code">
 					<div class="qr-code-body"></div>
 					<div class="title">扫一扫观看邀请函</div>
@@ -31,5 +37,18 @@
 		<a href="javascript:void(0)" class="arrow arrow-left"></a>
 		<a href="javascript:void(0)" class="arrow arrow-right"></a>
 	</div>
+	<script>
+(function(){
+	var countDownDays = Math.ceil( ( new Date(2016,9-1,28) - new Date() )/1000/60/60/24 ),
+		MANY_ZEROS = "000000000000000000";
+
+	function leftZeroPad(val, minLength) {
+		if (typeof(val) != "string")
+			val = String(val);
+		return (MANY_ZEROS.substring(0, minLength - val.length)) + val;
+	}
+	console.log(leftZeroPad(countDownDays,3))
+})();
+	</script>
 </body>
 </html>
