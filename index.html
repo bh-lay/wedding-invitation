@@ -4,6 +4,16 @@
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 	<title>陈仁磊-田晓杰</title>
+	<script>
+	(function(){
+		//平台、设备和操作系统 
+        var isMobile = !!navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i);
+        //跳转语句
+        if ( !isMobile ) { 
+ 			location.href = "/pc/"
+        }
+	})();
+	</script>
 	<link rel="stylesheet" href="/less/index.less">
 </head>
 <body>
