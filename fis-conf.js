@@ -7,22 +7,9 @@ fis.match('*.less', {
   parser: fis.plugin('less'),
   // .less 文件后缀构建后被改成 .css 文件
   rExt: '.css',
-  useSprite : true,
-  optimizer : fis.plugin('clean-css')
-});
-//sass编译
-fis.match('*.scss', {
-  // fis-parser-sass 插件进行解析
-  parser: fis.plugin('sass'),
-  // .less 文件后缀构建后被改成 .css 文件
-  rExt: '.css'
+  useSprite : true
 });
 
-
-fis.match('*.css', {
-    useSprite : true,
-    optimizer : fis.plugin('clean-css')
-});
 fis.config.set('settings.spriter.csssprites', {
     //图之间的边距
     margin: 10,
@@ -30,21 +17,10 @@ fis.config.set('settings.spriter.csssprites', {
     layout: 'matrix'
 });
 
-fis.match('*.png', {
-    optimizer : fis.plugin('png-compressor')
-}); 
 fis.match('::packager', {
   // postpackager: fis.plugin('loader'),
     spriter : fis.plugin('csssprites')
 });
-
-// // 启用插件
-// fis.hook('relative');
-
-// // 让所有文件，都使用相对路径。
-// fis.match('**', {
-//   relative: true
-// })
 
 //线上打包
 fis
@@ -63,6 +39,7 @@ fis
     useSprite: true
   })
   .match('*.png', {
+    optimizer : fis.plugin('png-compressor'),
     useHash: false,
     useSprite: false,
     optimizer: null
