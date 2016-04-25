@@ -867,4 +867,26 @@ body{
 			}
 		}
 	}
+	.text{
+		position: absolute;
+		bottom: 20%;
+		left: 0;
+		width: 100%;
+		p{
+			margin-bottom: 10px;
+			text-align: center;
+			line-height: 1.4em;
+			font-size: 14px;
+			color: #999;
+		}
+		.pic1{
+			@width: 270px;
+			@height: 14px;
+			width: @width;
+			height: @height;
+			margin: auto;
+			background-size: @width @height;
+			background-image: url("../images/18-3.png?__sprite");
+		}
+	}
 }
