@@ -266,10 +266,11 @@ body{
 		background-image: url("../images/6-1.jpg");
 	}
 	.text{
+		position: absolute;
 		width: 100%;
-		height: 14%;
+		top: 50%;
+		margin-top: -18px;
 		p{
-			padding-top: 20px;
 			font-size: 14px;
 			text-align: center;
 			color: #999;
@@ -285,9 +286,10 @@ body{
 		}
 	}
 	.img2{
-		position: relative;
+		position: absolute;
 		width: 100%;
 		height: 43%;
+		bottom: 0;
 		background-image: url("../images/6-2.jpg");
 	}
 }
@@ -892,23 +894,26 @@ body{
 #page22{
 	background: #fffcfc;
 	.img1{
-		@width: 130px;
+		@width: 150px;
 		width: @width;
 		height: @width;
-		top: 20%;
+		top: 24%;
 		left: 50%;
 		margin: -@width/2 0 0 -@width/2;
 		border: 1px solid #ebb;
-		background-image: url("../pc/images/qr_code_@2x.png");
+		img{
+			display: block;
+			width: 100%
+		}
 	}
 	.text1{
 		position: absolute;
 		width: 100%;
-		top: 40%;
+		top: 43%;
 		text-align: center;
 		p{
 			color: #d12626;
-			font-size: 14px;
+			font-size: 16px;
 		}
 	}
 	.mask{
@@ -916,23 +921,23 @@ body{
 		left: 0;
 		bottom: 0;
 		width: 100%;
-		height: 220px;
+		height: 190px;
 		svg{
 			position: absolute;
 			left: -10%;
 			width: 120%;
-			height: 320px;
+			height: 260px;
 		}
 	}
 	.text2{
 		position: absolute;
 		left: 0;
-		bottom: 100px;
+		bottom: 90px;
 		width: 100%;
 		h1{
 			margin-bottom: 5px;
 			text-align: center;
-			font-size: 22px;
+			font-size: 18px;
 			font-weight: normal;
 			color: #fff;
 			small{
@@ -942,8 +947,9 @@ body{
 		}
 		p{
 			text-align: center;
-			font-size: 16px;
+			font-size: 14px;
 			color: #fff;
+			opacity: .6;
 		}
 	}
 	.text3{
@@ -951,6 +957,7 @@ body{
 		left: 0;
 		bottom: 12px;
 		width: 100%;
+		opacity: .7;
 		h3{
 			margin-bottom: 12px;
 			text-align: center;
