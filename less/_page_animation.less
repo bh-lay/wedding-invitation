@@ -574,6 +574,9 @@
 		.img1 .mask span{
 			opacity: 1;
 		}
+		.text{
+			opacity: 0;
+		}
 	}
 	&.slideActive{
 		.img1 .mask span:nth-child(1),
@@ -594,6 +597,61 @@
 		}
 		.img1 .mask span:nth-child(8){
 			.transition( 1.2s );
+		}
+		.text{
+			opacity: 0;
+			.animation(lightSpeedIn .6s .6s forwards );
+		}
+	}
+}
+
+#page22{
+	&.slideHidden{
+		.img1,
+		.text1{
+			opacity: 0;
+		}
+		.mask,
+		.countdown,
+		h1,
+		.lace,
+		.date,
+		.pc-link,
+		.author{
+			.transform(translate(0,260px));
+		}
+	}
+	&.slideActive{
+		.img1{
+			opacity: 0;
+			.animation( rotateIn .5s 0s forwards );
+		}
+		.text1{
+			opacity: 0;
+			.animation( lightSpeedIn .5s .3s forwards );
+		}
+		.mask{
+			.transition( 1.2s );
+			.transition-delay( .5s );
+			.transform(translate(0,0));
+		}
+		.countdown,
+		h1{
+			.transition( .4s );
+			.transition-delay( 1s );
+			.transform(translate(0,0));
+		}
+		.lace,
+		.date{
+			.transition( .5s );
+			.transition-delay( 1.2s );
+			.transform(translate(0,0));
+		}
+		.pc-link,
+		.author{
+			.transition( .5s );
+			.transition-delay( 1.4s );
+			.transform(translate(0,0));
 		}
 	}
 }

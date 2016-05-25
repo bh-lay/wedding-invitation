@@ -99,7 +99,7 @@ body{
 		background: rgba(255,255,255,.3);
 		.pic1{
 			@width: 224px;
-			@height: 180px;
+			@height: 140px;
 			width: @width;
 			height: @height;
 			margin: 30px auto 15px;
@@ -118,6 +118,15 @@ body{
 			}
 		}
 		.pic2{
+			@width: 224px;
+			@height: 40px;
+			width: @width;
+			height: @height;
+			margin: 0 auto 10px;
+			background-size: @width @height;
+			background-image: url("../images/lace.png?__sprite");
+		}
+		.pic3{
 			@width: 218px;
 			@height: 29px;
 			width: @width;
@@ -1010,8 +1019,7 @@ body{
 			background-size: @width @height;
 			background-image: url("../images/lace.png?__sprite");
 		}
-
-		h3{
+		.pc-link{
 			margin-bottom: 10px;
 			text-align: center;
 			font-weight: normal;
@@ -1022,7 +1030,7 @@ body{
 				color: #fff;
 			}
 		}
-		p{
+		.author{
 			text-align: center;
 			font-size: 12px;
 			color: #fff;

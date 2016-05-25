@@ -41,7 +41,7 @@
 	});
 
 	// 默认播放音乐
-	// backgroundMusic();
+	backgroundMusic();
 
 	// swiper.on('slideChange',function( index ){
 	// 	location.hash = index;
