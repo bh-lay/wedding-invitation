@@ -1,35 +1,43 @@
 /**
  * @author 剧中人
  * @github https://github.com/bh-lay/toucher
- * @modified 2015-6-23 00:25
- *
+ * @modified 2016-5-25 23:27
+ * 
  */
 
-
+ 
 (function(global,doc,factoryFn){
 	//初始化toucher主方法
 	var factory = factoryFn(global,doc);
-
+	
 	//提供window.util.toucher()接口
 	global.util = global.util || {};
 	global.util.toucher = global.util.toucher || factory;
-
+	
 	//提供CommonJS规范的接口
 	global.define && define(function(require,exports,module){
 		return factory;
 	});
 })(this,document,function(window,document){
+
 	/**
-	 * 判断是否拥有某个class
-	 */
-	function hasClass(dom,classSingle){
-		return dom.className.match(new RegExp('(\\s|^)' + classSingle +'(\\s|$)'));
-	}
+	* class 操作
+	*/
+	var supports_classList = !!document.createElement('div').classList,
+		// 是否含有某个 class
+		hasClass = supports_classList ? function( node, classSingle ){
+			return node && node.classList && node.classList.contains( classSingle );
+		} : function ( node, classSingle ){
+			if( !node || typeof( node.className ) !== 'string'  ){
+				return false;
+			}
+			return !! node.className.match(new RegExp('(\\s|^)' + classSingle + '(\\s|$)'));
+		};
 
 	/**
 	 * @method 事件触发器
 	 * @description 根据事件最原始被触发的target，逐级向上追溯事件绑定
-	 *
+	 * 
 	 * @param string 事件名
 	 * @param object 原生事件对象
 	 */
@@ -41,7 +49,7 @@
 		}
 		//记录尚未被执行掉的事件绑定
 		var rest_events = this._events[eventName];
-
+		
 		//从事件源：target开始向上冒泡
 		var target = e.target;
 		while (1) {
@@ -62,7 +70,7 @@
 				}
 				return;
 			}
-
+			
 			//当前需要校验的事件集
 			var eventsList = rest_events;
 			//置空尚未执行掉的事件集
@@ -87,7 +95,7 @@
 			target = target.parentNode;
 		}
 	}
-
+	
 	/**
 	 * 执行绑定的回调函数，并创建一个事件对象
 	 * @param[string]事件名
@@ -103,7 +111,9 @@
 				type : name,
 				target : e.target,
 				pageX : touch.pageX,
-				pageY : touch.pageY
+				pageY : touch.pageY,
+				clientX : touch.clientX || 0,
+				clientY : touch.clientY || 0
 			};
 		//为swipe事件增加交互初始位置及移动距离
 		if(name.match(/^swipe/) && e.plugStartPosition){
@@ -119,7 +129,7 @@
 			e.preventDefault();
 			e.stopPropagation();
 		}
-
+		
 		return call_result;
 	}
 	/**
@@ -131,26 +141,26 @@
 
 	/**
 	 * 监听原生的事件，主动触发模拟事件
-	 *
+	 * 
 	 */
 	function eventListener(DOM){
 		var this_touch = this;
 
 		//轻击开始时间
 		var touchStartTime = 0;
-
+		
 		//记录上一次点击时间
 		var lastTouchTime = 0;
-
+		
 		//记录初始轻击的位置
 		var x1,y1,x2,y2;
-
+		
 		//轻击事件的延时器
 		var touchDelay;
-
+		
 		//测试长按事件的延时器
 		var longTap;
-
+		
 		//记录当前事件是否已为等待结束的状态
 		var isActive = false;
 		//记录有坐标信息的事件
@@ -161,7 +171,7 @@
 			clearTimeout(longTap);
 			clearTimeout(touchDelay);
 		}
-
+		
 		//断定此次事件为轻击事件
 		function isSingleTap(){
 			actionOver();
@@ -191,7 +201,7 @@
 			//touchend中，拿不到坐标位置信息，故使用全局保存下数据
 			e.plugStartPosition = eventMark.plugStartPosition;
 			e.plugTouches = eventMark.touches;
-
+			
 			EMIT.call(this_touch,'swipeEnd',e);
 			if(!isActive){
 				return;
@@ -211,7 +221,7 @@
 			}
 			lastTouchTime = now;
 		}
-
+		
 		//手指移动
 		function touchmove(e){
 			//缓存事件
@@ -268,10 +278,10 @@
 		DOM.addEventListener('MSPointerCancel',actionOver);
 		DOM.addEventListener('pointercancel',actionOver);
 	}
-
+	
 	/**
 	 * touch类
-	 *
+	 * 
 	 */
 	function Touch(DOM,param){
 		var param = param || {};
@@ -285,11 +295,11 @@
 	/**
 	 * @method 增加事件监听
 	 * @description 支持链式调用
-	 *
+	 * 
 	 * @param string 事件名
 	 * @param [string] 事件委托至某个class（可选）
-	 * @param function 符合条件的事件被触发时需要执行的回调函数
-	 *
+	 * @param function 符合条件的事件被触发时需要执行的回调函数 
+	 * 
 	 **/
 	Touch.prototype.on = function ON(eventStr,a,b){
 		var className,fn;
@@ -304,7 +314,7 @@
 		if(typeof(fn) == 'function' && eventStr && eventStr.length){
 			var eventNames = eventStr.split(/\s+/);
 			for(var i=0,total=eventNames.length;i<total;i++){
-
+			
 				var eventName = eventNames[i];
 				//事件堆无该事件，创建一个事件堆
 				if(!this._events[eventName]){
@@ -316,11 +326,11 @@
 				});
 			}
 		}
-
+		
 		//提供链式调用的支持
 		return this;
 	};
-
+	
 	//对外提供接口
 	return function (dom){
 		return new Touch(dom);
