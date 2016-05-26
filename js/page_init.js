@@ -9,7 +9,28 @@
 
 	node_page_num_total.innerHTML = swiper.slideList.length;
 	node_page_num_current.innerHTML = defaultIndex + 1;
+	function getCountDownHtml(){
+		var countDownDays = Math.ceil( ( new Date(2016,9-1,28) - new Date() )/1000/60/60/24 ),
+			MANY_ZEROS = "000000000000000000";
 
+		function leftZeroPad(val, minLength) {
+			if (typeof(val) != "string")
+				val = String(val);
+			return (MANY_ZEROS.substring(0, minLength - val.length)) + val;
+		}
+		function createCountDownHtml( str ){
+			var arr = str.match(/./g),
+				html = '';
+			arr.forEach(function( num ){
+				html += '<span>' + num + '</span>';
+			});
+			return html;
+		}
+		var str_day = leftZeroPad(countDownDays,3);
+		
+		return createCountDownHtml( str_day );
+
+	}
 	var isLoadedList = [];
 	function replaceTplToSlide( index ){
 		if( isLoadedList[index] ){
@@ -20,6 +41,10 @@
 			node_tpl = node_slide.getElementsByTagName('script')[0];
 		if( node_tpl ){
 			node_slide.innerHTML = node_tpl.innerHTML;
+			if( index == 21 ){
+				var html = getCountDownHtml();
+				document.querySelector('.countdown-group').innerHTML = html;
+			}
 		}
 	}
 	// 加载页面（一次前中后三页）
