@@ -1,5 +1,5 @@
 function backgroundMusic(){
-	var music = new Audio(),
+	var music = document.querySelector('audio'),
 		music_btn = document.querySelector('.music');
 
 	music.addEventListener('play',function(){
@@ -8,10 +8,14 @@ function backgroundMusic(){
 	music.addEventListener('pause',function(){
 		music_btn.classList.remove('play');
 	});
+	music.addEventListener('oncanplay',function(){
+		music.play();
+	});
+	music.addEventListener('onended',function(){
+		music.play();
+	});
+
 	//设置音乐属性
-	music.autoplay = 'autoplay="autoplay"';
-	music.loopPlay = 'loop="loop"';
-	music.src = '/mp3/LoveParadise_C48kbps.mp3';
 	
 	music.play();
 
