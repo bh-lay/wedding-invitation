@@ -64,7 +64,14 @@
 		lazyLoad( index );
 		node_page_num_current.innerHTML = index + 1;
 	});
-
+	// 去除蒙层
+	setTimeout(function(){
+		var node_mask = document.querySelector('.page-mask');
+		node_mask.classList.add('out');
+		setTimeout(function(){
+			node_mask.parentNode.removeChild( node_mask );
+		},1500);
+	},2000);
 	// 默认播放音乐
 	backgroundMusic();
 

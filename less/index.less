@@ -1,6 +1,7 @@
 @import "./_reset.less";
 @import "./music.less";
 @import "./_page_animation.less";
+@import "./_pacman.less";
 
 .borderbox(){
 	box-sizing: border-box;
@@ -17,6 +18,27 @@ body{
 }
 body{
 	font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.animation-pause{
+	*,
+	*:before,
+	*:after{
+	   -webkit-animation-play-state: paused !important;
+	   animation-play-state: paused !important;
+	}
+}
+.page-mask{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	background: #304;
+	transition: 1s;
+	&.out{
+		opacity: 0
+	}
 }
 .page-count{
 	position: fixed;
