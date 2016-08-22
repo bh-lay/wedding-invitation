@@ -38,9 +38,9 @@
 		}
 		isLoadedList[index] = true;
 		var node_slide = swiper.slideList[ index ],
-			node_tpl = node_slide.getElementsByTagName('script')[0];
+			node_tpl = node_slide.querySelector('.template');
 		if( node_tpl ){
-			node_slide.innerHTML = node_tpl.innerHTML;
+			node_slide.innerHTML = node_tpl.value;
 			if( index == 21 ){
 				var html = getCountDownHtml();
 				document.querySelector('.countdown-group').innerHTML = html;
@@ -70,8 +70,8 @@
 		node_mask.classList.add('out');
 		setTimeout(function(){
 			node_mask.parentNode.removeChild( node_mask );
-		},1500);
-	},2000);
+		},1000);
+	},1500);
 	// 默认播放音乐
 	backgroundMusic();
 
