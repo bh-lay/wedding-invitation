@@ -17,11 +17,6 @@ fis.config.set('settings.spriter.csssprites', {
     layout: 'matrix'
 });
 
-fis.match('::packager', {
-  // postpackager: fis.plugin('loader'),
-    spriter : fis.plugin('csssprites')
-});
-
 //线上打包
 fis
   .media('production')
@@ -31,7 +26,10 @@ fis
   })
   // 启用 fis-spriter-csssprites 插件
   .match('::package', {
-    spriter: fis.plugin('csssprites')
+    spriter: fis.plugin('csssprites'),
+    postpackager: fis.plugin('loader', {
+      allInOne: true
+    })
   })
   // 对 CSS 进行图片合并
   .match('*.{css,less}', {
