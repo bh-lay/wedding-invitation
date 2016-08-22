@@ -49,4 +49,13 @@ fis
   //使用hash
   .match('*.{js,css,jpg,png,less,gif,svg,eot,ttf,woff,woff2}', {
     useHash: true
+  })
+  // 开辟独立的目录
+  .match('*', {
+    release: 'build/wedding/$0',
+    domain: '//dn-lay.qbox.me'
+  })
+  // html放置在自身目录内
+  .match('**.html', {
+    release: '../../wedding/$0'
   });
