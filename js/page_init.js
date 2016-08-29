@@ -79,3 +79,43 @@
 	// 	location.hash = index;
 	// });
 })();
+
+    // 如果是微信环境，加载微信JS-SDK
+    var script = document.createElement('script');
+    script.src = '//res.wx.qq.com/open/js/jweixin-1.0.0.js';
+    document.body.appendChild(script);
+
+    script.onload = function () {
+        wx.config({
+	        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+		    appId: 'wx933a202dcd5f7a76', // 必填，公众号的唯一标识
+		    timestamp: new , // 必填，生成签名的时间戳
+		    nonceStr: '', // 必填，生成签名的随机串
+		    signature: '',// 必填，签名，见附录1
+	        jsApiList: [
+	            'onMenuShareTimeline', 'onMenuShareAppMessage'
+	        ]
+	    });
+        var data = window.custom_share_data || {},
+            randomNum = Math.ceil( Math.random() * 2000 ) + 2000;
+        wx.onMenuShareTimeline({
+            title: data.desc, // 分享标题
+            link: data.bdUrl, // 分享链接
+            imgUrl: data.bdPic // 分享图标
+        });
+        // 获取“分享到聊天”按钮点击状态及自定义分享内容接口
+        wx.onMenuShareAppMessage({
+            title: data.desc, // 分享标题
+            link: data.bdUrl, // 分享链接
+            imgUrl: data.bdPic, // 分享图标
+            desc: '已经有' + randomNum + '个小伙伴分享了这张搞笑GIF哦！', // 分享描述
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
+        });
+        // 添加验证通过后的回调
+        wx.ready(function(){
+            // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+            // 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+            setShareInfo();
+        });
+    };
