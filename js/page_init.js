@@ -24,11 +24,15 @@
 			arr.forEach(function( num ){
 				html += '<span>' + num + '</span>';
 			});
-			return html;
+			return '<strong>倒计时：</strong><div class="countdown-group">' + html + '</div><strong>天</strong>';
 		}
 		var str_day = leftZeroPad(countDownDays,3);
-		
-		return createCountDownHtml( str_day );
+			
+		if( countDownDays < 0 ){
+			document.querySelector('.countdown').style.display = 'none';
+			return
+		}
+		return countDownDays == 0 ? '<span>婚</span><span>礼</span><span>中</span>' : createCountDownHtml( str_day );
 
 	}
 	var isLoadedList = [];
@@ -38,12 +42,12 @@
 		}
 		isLoadedList[index] = true;
 		var node_slide = swiper.slideList[ index ],
-			node_tpl = node_slide.querySelector('.template');
+			node_tpl = node_slide.getElementsByClassName('template')[0];
 		if( node_tpl ){
 			node_slide.innerHTML = node_tpl.value;
 			if( index == 21 ){
 				var html = getCountDownHtml();
-				document.querySelector('.countdown-group').innerHTML = html;
+				document.querySelector('.countdown').innerHTML = html;
 			}
 		}
 	}

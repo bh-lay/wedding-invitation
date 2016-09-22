@@ -15,8 +15,12 @@
 		});
 		return html + '<strong>天</strong>';
 	}
+	if( countDownDays < 0 ){
+		utils.query('.countdown').style.display = 'none';
+		return
+	}
 	var str_day = leftZeroPad(countDownDays,3),
-		html = createCountDownHtml( str_day );
+		html = countDownDays == 0 ? '<span>婚</span><span>礼</span><span>中</span>' : createCountDownHtml( str_day );
 	
 	utils.query('.countdown-body').innerHTML = html;
 
